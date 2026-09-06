@@ -2,10 +2,13 @@
 // students/faculty/fee-challan sample data from prisma/seed.js. Use this
 // against the live database; use `npm run seed` only for local/dev.
 require('dotenv').config();
+const { Pool } = require('pg');
+const { PrismaPg } = require('@prisma/adapter-pg');
 const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcryptjs');
 
-const prisma = new PrismaClient();
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter: new PrismaPg(pool) });
 
 async function main() {
   const adminEmail = process.env.ADMIN_SEED_EMAIL;

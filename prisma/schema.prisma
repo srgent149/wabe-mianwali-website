@@ -11,16 +11,14 @@ datasource db {
 }
 
 generator client {
-  provider      = "prisma-client-js"
-  // "binary" runs the query engine as a separate OS process instead of an
-  // embedded worker thread. Hostinger freezes idle app processes to save
-  // resources; the default "library" engine's embedded async runtime
-  // doesn't survive that freeze/resume cycle (PANIC: timer has gone away).
-  engineType    = "binary"
-  // "native" covers local dev (Windows/Mac); the rest cover common Linux
-  // hosting runtimes so the correct query engine binary is downloaded
-  // regardless of which base image Hostinger's build/runtime containers use.
-  binaryTargets = ["native", "debian-openssl-3.0.x", "debian-openssl-1.1.x", "linux-musl-openssl-3.0.x", "rhel-openssl-3.0.x"]
+  // Driver adapters bypass Prisma's Rust query engine entirely — the client
+  // talks to Postgres through the plain-JS `pg` driver instead. Neither the
+  // "library" engine (embedded async runtime, breaks when Hostinger freezes
+  // idle processes: PANIC: timer has gone away) nor the "binary" engine
+  // (separate OS process, failed to initialize here) survived this host's
+  // process management, so this avoids the native engine altogether.
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 model Student {
