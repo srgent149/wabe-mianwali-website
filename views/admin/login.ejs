@@ -1,0 +1,28 @@
+<div class="admin-login-wrap">
+  <div class="admin-login-card">
+    <div style="text-align:center; margin-bottom:24px;">
+      <span class="brand-badge" style="margin:0 auto 12px;"><img src="/images/logo.jpg" alt="School logo" /></span>
+      <h3>WABE Admin Login</h3>
+      <p style="font-size:0.85rem; color:var(--muted);">Staff access only</p>
+    </div>
+
+    <% if (typeof flashError !== 'undefined' && flashError.length) { %>
+      <% flashError.forEach(function(msg) { %>
+        <div class="alert alert-error"><%- icon('alertCircle') %> <span><%= msg %></span></div>
+      <% }) %>
+    <% } %>
+
+    <form action="/admin/login" method="POST">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Log In</button>
+    </form>
+  </div>
+</div>

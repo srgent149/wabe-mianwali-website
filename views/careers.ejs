@@ -1,0 +1,83 @@
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Careers</span>
+      <h1>Join the WABE Mianwali Team</h1>
+      <p>We're looking for educators and staff who want to do school differently alongside us.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card reveal">
+        <div class="card-icon"><%- icon('users') %></div>
+        <h4>A Real Team</h4>
+        <p>Small class sizes and a collaborative staff room, not a factory floor.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon green"><%- icon('graduationCap') %></div>
+        <h4>Real Development</h4>
+        <p>Ongoing training, mentorship, and support to grow as an educator.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><%- icon('heart') %></div>
+        <h4>A Real Mission</h4>
+        <p>Be part of building a different kind of school in Mianwali.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Open Positions</span>
+      <h2>Current Openings</h2>
+    </div>
+    <div class="grid grid-3">
+      <% openings.forEach(function(job) { %>
+        <div class="card job-card reveal">
+          <span class="badge <%= job.type === 'Full-time' ? '' : 'green' %>"><%= job.type %></span>
+          <h4 style="margin-top:12px;"><%= job.title %></h4>
+          <p style="font-size:0.85rem; color:var(--green-700); font-weight:600;"><%= job.department %></p>
+          <p class="requirements"><%= job.requirements %></p>
+          <a href="#apply" data-job-id="<%= job.id %>" class="btn btn-outline btn-sm apply-btn">Apply for this Role</a>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tinted" id="apply">
+  <div class="container" style="max-width:820px;">
+    <div class="section-head">
+      <span class="eyebrow">Apply</span>
+      <h2>Job Application Form</h2>
+    </div>
+
+    <% if (typeof submitted !== 'undefined' && submitted) { %>
+      <div class="alert alert-success">
+        <%- icon('checkCircle') %>
+        <span>Thank you for applying! Our HR team will review your application and reach out if your profile is shortlisted. A confirmation email has been sent to your address.</span>
+      </div>
+    <% } %>
+
+    <div class="card">
+      <form action="/careers" method="POST" novalidate>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <div class="form-grid">
+          <%- include('partials/form-field', { type: 'text', name: 'applicantName', label: 'Full Name', value: formValues.applicantName, error: errors.applicantName }) %>
+          <%- include('partials/form-field', {
+                type: 'select', name: 'jobOpeningId', label: 'Position', id: 'jobOpeningId',
+                value: formValues.jobOpeningId || preselectJobId, error: errors.jobOpeningId,
+                options: openings.map(function(j){ return { value: j.id, label: j.title }; }).concat([{ value: 'other', label: 'Other / General Application' }])
+              }) %>
+          <%- include('partials/form-field', { type: 'text', name: 'qualification', label: 'Qualification', value: formValues.qualification, error: errors.qualification }) %>
+          <%- include('partials/form-field', { type: 'text', name: 'experience', label: 'Experience', value: formValues.experience, error: errors.experience, placeholder: 'e.g. 3 years teaching Grade 6-8' }) %>
+          <%- include('partials/form-field', { type: 'tel', name: 'phone', label: 'Phone Number', value: formValues.phone, error: errors.phone, placeholder: '03XX-XXXXXXX' }) %>
+          <%- include('partials/form-field', { type: 'email', name: 'email', label: 'Email Address', value: formValues.email, error: errors.email }) %>
+          <%- include('partials/form-field', { type: 'textarea', name: 'coverMessage', label: 'Cover Message', value: formValues.coverMessage, error: errors.coverMessage, required: false, full: true }) %>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Submit Application</button>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,145 @@
+:root {
+  --white: #ffffff;
+  --paper: #f7f9fb;
+  --blue-900: #0f2c4c;
+  --blue-700: #1d4e89;
+  --blue-500: #2e6fb0;
+  --blue-100: #e5eef7;
+  --green-700: #1f6f4a;
+  --green-500: #2e9161;
+  --green-100: #e4f3ea;
+  --ink: #1a2430;
+  --muted: #5b6672;
+  --line: #e1e7ed;
+  --gold-accent: #c9962b;
+
+  --font-heading: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 3px rgba(15, 44, 76, 0.08);
+  --shadow-md: 0 8px 24px rgba(15, 44, 76, 0.1);
+  --container: 1180px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  color: var(--blue-900);
+  line-height: 1.2;
+  margin: 0 0 0.5em;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+h3 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+}
+h4 {
+  font-size: 1.1rem;
+}
+
+p {
+  margin: 0 0 1em;
+  color: var(--ink);
+}
+
+a {
+  color: var(--blue-700);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--blue-500);
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+ul,
+ol {
+  padding-left: 1.25em;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+*:focus-visible {
+  outline: 3px solid var(--blue-500);
+  outline-offset: 2px;
+}
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

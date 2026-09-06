@@ -1,0 +1,76 @@
+<%
+  var iconMap = {
+    building: 'building', microscope: 'microscope', trophy: 'trophy', mic: 'mic',
+    laptop: 'laptop', book: 'book', globe: 'globe', cap: 'graduationCap', camera: 'camera'
+  };
+%>
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Campus Life</span>
+      <h1>Gallery, Events & the School Journal</h1>
+      <p>A look at everyday life, milestones, and stories from WABE International School, Mianwali Campus.</p>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <a href="/campus-life?tab=gallery" class="tab-link <%= tab === 'gallery' ? 'active' : '' %>">Gallery</a>
+      <a href="/campus-life?tab=events" class="tab-link <%= tab === 'events' ? 'active' : '' %>">Events & News</a>
+      <a href="/campus-life?tab=journal" class="tab-link <%= tab === 'journal' ? 'active' : '' %>">School Journal</a>
+    </div>
+
+    <% if (tab === 'gallery') { %>
+      <div class="grid grid-4">
+        <% galleryCategories.forEach(function(cat) { %>
+          <div class="gallery-tile theme-<%= cat.colorTheme %> reveal">
+            <%- icon(iconMap[cat.iconKey] || 'camera') %>
+            <span class="cap"><%= cat.title %></span>
+            <span class="placeholder-note"><%= cat.images.length ? cat.images.length + ' photos' : 'Photos coming soon' %></span>
+          </div>
+        <% }) %>
+      </div>
+    <% } else if (tab === 'events') { %>
+      <div class="grid grid-3">
+        <% events.forEach(function(ev) { %>
+          <div class="card reveal">
+            <span class="badge <%= ev.type === 'Event' ? '' : 'green' %>"><%= ev.type %></span>
+            <h4 style="margin-top:12px;"><%= ev.title %></h4>
+            <p style="font-size:0.85rem; color:var(--muted);"><%- icon('calendar') %> <%= ev.eventDate.toDateString() %></p>
+            <p><%= ev.description %></p>
+          </div>
+        <% }) %>
+      </div>
+    <% } else if (tab === 'journal') { %>
+      <div class="grid grid-3">
+        <% journalIssues.forEach(function(issue) { %>
+          <div class="card reveal">
+            <div class="card-icon green"><%- icon('newspaper') %></div>
+            <span class="badge"><%= issue.issueLabel %></span>
+            <h4 style="margin-top:12px;"><%= issue.title %></h4>
+            <p style="font-size:0.85rem; color:var(--muted);"><%- icon('calendar') %> <%= issue.publishDate.toDateString() %></p>
+            <p><%= issue.description %></p>
+            <% if (issue.pdfFilePath) { %>
+              <a href="<%= issue.pdfFilePath %>" target="_blank" class="btn btn-outline btn-sm"><%- icon('download') %> Download PDF</a>
+            <% } %>
+          </div>
+        <% }) %>
+      </div>
+
+      <div class="card reveal" style="max-width:520px; margin-top:32px;">
+        <h4>Subscribe to the School Journal</h4>
+        <p style="font-size:0.88rem; color:var(--muted);">Get notified by email when a new issue is published.</p>
+        <% if (subscribed) { %>
+          <div class="alert alert-success"><%- icon('checkCircle') %> <span>Thanks! You're subscribed to the school journal.</span></div>
+        <% } else { %>
+          <% if (subscribeError) { %>
+            <div class="alert alert-error"><%- icon('alertCircle') %> <span><%= subscribeError %></span></div>
+          <% } %>
+          <form action="/campus-life/subscribe" method="POST" style="display:flex; gap:10px; flex-wrap:wrap;">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <input type="email" name="email" placeholder="you@example.com" required style="flex:1; min-width:200px; padding:11px 14px; border:1px solid var(--line); border-radius:8px;" />
+            <button type="submit" class="btn btn-secondary">Subscribe</button>
+          </form>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+</section>

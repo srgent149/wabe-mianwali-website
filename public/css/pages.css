@@ -1,0 +1,158 @@
+/* Small page-specific tweaks that don't warrant their own component class. */
+
+.pillars-icon-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stage-card .subjects {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.stage-card .subjects li {
+  font-size: 0.88rem;
+  color: var(--muted);
+  padding-left: 18px;
+  position: relative;
+}
+.stage-card .subjects li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green-500);
+}
+
+.ethos-grid .card {
+  text-align: center;
+}
+
+.eligibility-table td,
+.eligibility-table th {
+  text-align: center;
+}
+.eligibility-table td:first-child,
+.eligibility-table th:first-child {
+  text-align: left;
+}
+
+.challan-card {
+  border: 2px solid var(--blue-100);
+}
+.challan-card .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.challan-card .row:last-child {
+  border-bottom: none;
+}
+.challan-card .row .label {
+  color: var(--muted);
+}
+.challan-card .row .value {
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+.challan-card .total-row {
+  font-size: 1.1rem;
+}
+.challan-card .total-row .value {
+  color: var(--blue-900);
+}
+
+.faculty-filter {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.faculty-filter button {
+  border: 1px solid var(--line);
+  background: var(--white);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--muted);
+}
+.faculty-filter button.active {
+  background: var(--blue-700);
+  color: var(--white);
+  border-color: var(--blue-700);
+}
+
+.faculty-card {
+  text-align: center;
+}
+.faculty-card .avatar {
+  margin: 0 auto 16px;
+}
+
+.job-card .requirements {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.map-frame {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  height: 340px;
+}
+.map-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.contact-info-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.print-challan-page {
+  max-width: 640px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: var(--font-body);
+}
+.print-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 3px solid var(--blue-700);
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+}
+.print-header img {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  object-fit: cover;
+}
+.print-header h2 {
+  margin: 0;
+}
+.print-header .sub {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+@media print {
+  body {
+    background: var(--white);
+  }
+}

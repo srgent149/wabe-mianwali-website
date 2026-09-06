@@ -1,0 +1,52 @@
+<footer class="site-footer no-print">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="footer-brand">
+        <span class="brand-badge"><img src="/images/logo.jpg" alt="<%= school.name %> logo" /></span>
+        <div>
+          <strong style="color:var(--white)"><%= school.name %></strong><br />
+          <span style="font-size:0.85rem"><%= school.campus %></span>
+        </div>
+      </div>
+      <p><%= school.brandLine %> &mdash; <%= school.tagline %>.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/academics">Academics</a></li>
+        <li><a href="/admissions">Admissions</a></li>
+        <li><a href="/fees">Fees & Challan</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="/faculty">Faculty</a></li>
+        <li><a href="/campus-life">Campus Life</a></li>
+        <li><a href="/guidance">Guidance & Development</a></li>
+        <li><a href="/careers">Careers</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p><%- icon('mapPin') %> <%= school.address %></p>
+      <p><%- icon('phone') %> <%= school.phone %></p>
+      <p><%- icon('mail') %> <%= school.officeEmail %></p>
+      <p><%- icon('clock') %> <%= school.officeHours %></p>
+      <div class="footer-social">
+        <a href="<%= school.socials.facebook %>" target="_blank" rel="noopener" aria-label="Facebook"><%- icon('facebook') %></a>
+        <a href="<%= school.socials.instagram %>" target="_blank" rel="noopener" aria-label="Instagram"><%- icon('instagram') %></a>
+        <a href="<%= school.socials.youtube %>" target="_blank" rel="noopener" aria-label="YouTube"><%- icon('youtube') %></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <span>&copy; <%= new Date().getFullYear() %> <%= school.name %>, <%= school.campus %>. All rights reserved.</span>
+    <span><a href="/admin/login">Staff Login</a></span>
+  </div>
+</footer>

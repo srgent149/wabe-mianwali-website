@@ -1,0 +1,99 @@
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Academics</span>
+      <h1>A Federal Board Curriculum, Taught Differently</h1>
+      <p>Browse the subjects taught at each stage, from Nursery through Class 10 (Matriculation).</p>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <% syllabus.forEach(function(stage, i) { %>
+        <a href="#" class="tab-link syllabus-tab <%= i === 0 ? 'active' : '' %>" data-syllabus-tab="<%= stage.key %>" role="tab"><%= stage.label %></a>
+      <% }) %>
+    </div>
+
+    <% syllabus.forEach(function(stage, i) { %>
+      <div class="syllabus-panel card" data-syllabus-panel="<%= stage.key %>" style="<%= i === 0 ? '' : 'display:none;' %> margin-bottom:16px;">
+        <span class="badge"><%= stage.board %></span>
+        <h3 style="margin-top:14px;"><%= stage.label %> Subjects</h3>
+        <div class="grid grid-3">
+          <% stage.subjects.forEach(function(subj) { %>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="card-icon green" style="width:36px;height:36px;margin:0;"><%- icon('book') %></span>
+              <span><%= subj %></span>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">How We Teach</span>
+      <h2>Structured, Hands-On, Continuously Assessed</h2>
+    </div>
+    <div class="grid grid-4">
+      <div class="card reveal">
+        <div class="card-icon"><%- icon('book') %></div>
+        <h4>Structured Lesson Plans</h4>
+        <p>Every subject follows a clear scheme of work aligned to the Federal Board.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon green"><%- icon('microscope') %></div>
+        <h4>Hands-On Learning</h4>
+        <p>Lab work, projects, and demonstrations turn theory into practice.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><%- icon('checkCircle') %></div>
+        <h4>Continuous Assessment</h4>
+        <p>Regular, low-stakes checks keep learning gaps from piling up.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon green"><%- icon('users') %></div>
+        <h4>Small-Group Remedial Support</h4>
+        <p>Students who need extra help get it in small, focused groups.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tinted">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Assessment Structure</span>
+      <h2>How Students Are Evaluated</h2>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Assessment</th><th>Frequency</th><th>Weightage</th></tr>
+        </thead>
+        <tbody>
+          <% assessmentStructure.forEach(function(a) { %>
+            <tr><td><%= a.name %></td><td><%= a.frequency %></td><td><%= a.weightage %></td></tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-band reveal">
+      <div>
+        <h2>Ready to See It in Action?</h2>
+        <p>Explore guidance programs, campus life, or start your admission application.</p>
+      </div>
+      <div class="cta-band-actions">
+        <a href="/guidance" class="btn" style="background:var(--white); color:var(--green-700);">Guidance & Development</a>
+        <a href="/campus-life" class="btn btn-outline-light">Campus Life</a>
+        <a href="/admissions" class="btn btn-outline-light">Apply Now</a>
+        <a href="/fees" class="btn btn-outline-light">View Fees</a>
+      </div>
+    </div>
+  </div>
+</section>

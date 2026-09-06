@@ -1,0 +1,47 @@
+<div class="admin-topline"><h2>Fee Structure</h2></div>
+
+<div class="admin-panel">
+  <h3 id="form-title">Add / Edit Fee Structure Row</h3>
+  <form action="/admin/fee-structures" method="POST" id="fs-form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <input type="hidden" name="id" id="fs-id" value="" />
+    <div class="form-grid">
+      <div class="field">
+        <label for="fs-className">Class</label>
+        <select name="className" id="fs-className" required>
+          <% classList.forEach(function(c) { %><option value="<%= c %>"><%= c %></option><% }) %>
+        </select>
+      </div>
+      <div class="field"><label for="fs-admissionFee">Admission Fee (PKR)</label><input type="number" name="admissionFee" id="fs-admissionFee" min="0" required /></div>
+      <div class="field"><label for="fs-monthlyTuition">Monthly Tuition (PKR)</label><input type="number" name="monthlyTuition" id="fs-monthlyTuition" min="0" required /></div>
+      <div class="field"><label for="fs-examFee">Exam Fee (PKR)</label><input type="number" name="examFee" id="fs-examFee" min="0" required /></div>
+      <div class="field"><label for="fs-displayOrder">Display Order</label><input type="number" name="displayOrder" id="fs-displayOrder" value="0" /></div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-outline" data-reset-form="fs-form" data-reset-id="fs-id">Clear</button>
+  </form>
+</div>
+
+<div class="table-wrap">
+  <table class="data-table">
+    <thead><tr><th>Class</th><th>Admission Fee</th><th>Monthly Tuition</th><th>Exam Fee</th><th>Order</th><th></th></tr></thead>
+    <tbody>
+      <% feeStructures.forEach(function(fs) { %>
+        <tr>
+          <td><%= fs.className %></td>
+          <td>PKR <%= fs.admissionFee.toLocaleString() %></td>
+          <td>PKR <%= fs.monthlyTuition.toLocaleString() %></td>
+          <td>PKR <%= fs.examFee.toLocaleString() %></td>
+          <td><%= fs.displayOrder %></td>
+          <td style="white-space:nowrap;">
+            <button type="button" class="btn btn-outline btn-sm" data-edit-entity="fs" data-record='<%- JSON.stringify(fs).split("'").join("&#39;") %>'>Edit</button>
+            <form action="/admin/fee-structures/<%= fs.id %>/delete" method="POST" class="inline-form">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <button type="submit" class="btn btn-outline btn-sm" data-confirm="Delete this fee structure row?">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

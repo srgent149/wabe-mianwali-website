@@ -1,0 +1,42 @@
+<div class="admin-topline"><h2>School Journal</h2></div>
+
+<div class="admin-panel">
+  <h3 id="form-title">Add / Edit Journal Issue</h3>
+  <form action="/admin/journal" method="POST" enctype="multipart/form-data" id="jr-form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <input type="hidden" name="id" id="jr-id" value="" />
+    <div class="form-grid">
+      <div class="field"><label>Issue Label</label><input type="text" name="issueLabel" id="jr-issueLabel" placeholder="e.g. Issue 4" required /></div>
+      <div class="field"><label>Title</label><input type="text" name="title" id="jr-title" required /></div>
+      <div class="field"><label>Publish Date</label><input type="date" name="publishDate" id="jr-publishDate" required /></div>
+      <div class="field"><label>PDF (optional)</label><input type="file" name="pdf" accept=".pdf" /></div>
+      <div class="field full"><label>Description</label><textarea name="description" id="jr-description" required></textarea></div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-outline" data-reset-form="jr-form" data-reset-id="jr-id">Clear</button>
+  </form>
+</div>
+
+<div class="table-wrap">
+  <table class="data-table">
+    <thead><tr><th>Issue</th><th>Title</th><th>Publish Date</th><th>PDF</th><th></th></tr></thead>
+    <tbody>
+      <% journalIssues.forEach(function(j) { %>
+        <tr>
+          <td><%= j.issueLabel %></td>
+          <td><%= j.title %></td>
+          <td><%= j.publishDate.toDateString() %></td>
+          <td><%= j.pdfFilePath ? 'Attached' : '-' %></td>
+          <td style="white-space:nowrap;">
+            <% var jrEditData = { id: j.id, issueLabel: j.issueLabel, title: j.title, publishDate: j.publishDate.toISOString().slice(0,10), description: j.description }; %>
+            <button type="button" class="btn btn-outline btn-sm" data-edit-entity="jr" data-record='<%- JSON.stringify(jrEditData).split("'").join("&#39;") %>'>Edit</button>
+            <form action="/admin/journal/<%= j.id %>/delete" method="POST" class="inline-form">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <button type="submit" class="btn btn-outline btn-sm" data-confirm="Delete this issue?">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,174 @@
+// WABE International School, Mianwali Campus
+// Using SQLite for zero-setup local development.
+// For production, switch provider to "postgresql" and set DATABASE_URL
+// to a Postgres connection string (see README.md "Deployment" section) —
+// the schema below uses only types/features supported by both providers,
+// so migrating is just: change provider, update DATABASE_URL, re-run migrate.
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Student {
+  id            Int          @id @default(autoincrement())
+  rollNumber    String       @unique
+  name          String
+  className     String
+  section       String
+  guardianName  String
+  guardianPhone String
+  guardianEmail String?
+  status        String       @default("Active") // Active, Left, Graduated
+  challans      FeeChallan[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}
+
+model FeeChallan {
+  id            Int       @id @default(autoincrement())
+  student       Student   @relation(fields: [studentId], references: [id])
+  studentId     Int
+  month         String // e.g. "August 2026"
+  tuitionAmount Int
+  fineAmount    Int       @default(0)
+  totalAmount   Int
+  dueDate       DateTime
+  status        String    @default("Unpaid") // Unpaid, Partial, Paid
+  paidDate      DateTime?
+  method        String? // Cash, Bank Transfer, Online
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model FeeStructure {
+  id             Int      @id @default(autoincrement())
+  className      String   @unique
+  admissionFee   Int
+  monthlyTuition Int
+  examFee        Int
+  displayOrder   Int      @default(0)
+  updatedAt      DateTime @updatedAt
+}
+
+model AdmissionApplication {
+  id               Int      @id @default(autoincrement())
+  studentName      String
+  dob              DateTime
+  gender           String
+  classAppliedFor  String
+  previousSchool   String?
+  guardianName     String
+  relation         String
+  phone            String
+  email            String
+  address          String
+  notes            String?
+  status           String   @default("New") // New, Contacted, Enrolled, Rejected
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model JobOpening {
+  id           Int              @id @default(autoincrement())
+  title        String
+  department   String
+  type         String // Full-time, Part-time
+  requirements String
+  isActive     Boolean          @default(true)
+  displayOrder Int              @default(0)
+  applications JobApplication[]
+  createdAt    DateTime         @default(now())
+}
+
+model JobApplication {
+  id              Int         @id @default(autoincrement())
+  jobOpening      JobOpening? @relation(fields: [jobOpeningId], references: [id])
+  jobOpeningId    Int?
+  applicantName   String
+  qualification   String
+  experience      String
+  phone           String
+  email           String
+  coverMessage    String?
+  resumeFilePath  String?
+  createdAt       DateTime    @default(now())
+}
+
+model FacultyMember {
+  id              Int      @id @default(autoincrement())
+  name            String
+  role            String
+  department      String
+  qualification   String
+  yearsExperience Int
+  photoPath       String?
+  displayOrder    Int      @default(0)
+  createdAt       DateTime @default(now())
+}
+
+model GalleryCategory {
+  id           Int            @id @default(autoincrement())
+  title        String
+  colorTheme   String         @default("blue") // blue, green
+  iconKey      String         @default("camera")
+  displayOrder Int            @default(0)
+  images       GalleryImage[]
+}
+
+model GalleryImage {
+  id         Int             @id @default(autoincrement())
+  category   GalleryCategory @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  imagePath  String
+  caption    String?
+  createdAt  DateTime        @default(now())
+}
+
+model EventOrNews {
+  id          Int      @id @default(autoincrement())
+  title       String
+  type        String // Event, News
+  description String
+  eventDate   DateTime
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model JournalIssue {
+  id          Int      @id @default(autoincrement())
+  issueLabel  String
+  title       String
+  description String
+  publishDate DateTime
+  pdfFilePath String?
+  createdAt   DateTime @default(now())
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  phone     String
+  email     String
+  reason    String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model JournalSubscriber {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  subscribedAt DateTime @default(now())
+}
+
+model AdminUser {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}

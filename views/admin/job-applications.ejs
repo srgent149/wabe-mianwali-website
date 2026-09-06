@@ -1,0 +1,23 @@
+<div class="admin-topline"><h2>Job Applications</h2></div>
+
+<div class="table-wrap">
+  <table class="data-table">
+    <thead>
+      <tr><th>Applicant</th><th>Position</th><th>Qualification</th><th>Experience</th><th>Phone</th><th>Email</th><th>Submitted</th></tr>
+    </thead>
+    <tbody>
+      <% applications.forEach(function(a) { %>
+        <tr>
+          <td><%= a.applicantName %></td>
+          <td><%= a.jobOpening ? a.jobOpening.title : 'General Application' %></td>
+          <td><%= a.qualification %></td>
+          <td><%= a.experience %></td>
+          <td><%= a.phone %></td>
+          <td><%= a.email %></td>
+          <td><%= a.createdAt.toDateString() %></td>
+        </tr>
+      <% }) %>
+      <% if (!applications.length) { %><tr><td colspan="7">No job applications yet.</td></tr><% } %>
+    </tbody>
+  </table>
+</div>

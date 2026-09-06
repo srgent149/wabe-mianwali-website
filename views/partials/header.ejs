@@ -1,0 +1,44 @@
+<div class="topbar no-print">
+  <div class="container">
+    <div class="topbar-links">
+      <a href="tel:<%= school.phone.replace(/\s+/g, '') %>"><%- icon('phone') %> <%= school.phone %></a>
+      <a href="mailto:<%= school.officeEmail %>"><%- icon('mail') %> <%= school.officeEmail %></a>
+    </div>
+    <div class="topbar-social">
+      <a href="<%= school.socials.facebook %>" target="_blank" rel="noopener" aria-label="Facebook"><%- icon('facebook') %></a>
+      <a href="<%= school.socials.instagram %>" target="_blank" rel="noopener" aria-label="Instagram"><%- icon('instagram') %></a>
+      <a href="<%= school.socials.youtube %>" target="_blank" rel="noopener" aria-label="YouTube"><%- icon('youtube') %></a>
+    </div>
+  </div>
+</div>
+
+<header class="site-header no-print">
+  <div class="container header-inner">
+    <a href="/" class="brand">
+      <span class="brand-badge"><img src="/images/logo.jpg" alt="<%= school.name %> logo" /></span>
+      <span class="brand-text">
+        <span class="brand-name"><%= school.name %></span>
+        <span class="brand-sub"><%= school.campus %></span>
+      </span>
+    </a>
+
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <%- icon('menu') %>
+    </button>
+
+    <nav class="main-nav" aria-label="Primary">
+      <button class="nav-close" aria-label="Close menu"><%- icon('x') %></button>
+      <a href="/" class="<%= currentPath === '/' ? 'active' : '' %>">Home</a>
+      <a href="/about" class="<%= currentPath.startsWith('/about') ? 'active' : '' %>">About</a>
+      <a href="/academics" class="<%= currentPath.startsWith('/academics') ? 'active' : '' %>">Academics</a>
+      <a href="/admissions" class="<%= currentPath.startsWith('/admissions') ? 'active' : '' %>">Admissions</a>
+      <a href="/fees" class="<%= currentPath.startsWith('/fees') ? 'active' : '' %>">Fees</a>
+      <a href="/faculty" class="<%= currentPath.startsWith('/faculty') ? 'active' : '' %>">Faculty</a>
+      <a href="/campus-life" class="<%= currentPath.startsWith('/campus-life') ? 'active' : '' %>">Campus Life</a>
+      <a href="/guidance" class="<%= currentPath.startsWith('/guidance') ? 'active' : '' %>">Guidance</a>
+      <a href="/careers" class="<%= currentPath.startsWith('/careers') ? 'active' : '' %>">Careers</a>
+      <a href="/contact" class="<%= currentPath.startsWith('/contact') ? 'active' : '' %>">Contact</a>
+    </nav>
+  </div>
+</header>
+<div class="nav-scrim no-print"></div>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/pages.css" />
+  <link rel="stylesheet" href="/css/print.css" media="print" />
+</head>
+<body>
+  <div class="print-challan-page">
+    <div class="print-header">
+      <img src="/images/logo.jpg" alt="School logo" />
+      <div>
+        <h2>WABE International School</h2>
+        <div class="sub">Mianwali Campus &bull; Fee & Fine Challan</div>
+      </div>
+    </div>
+
+    <div class="card challan-card">
+      <h3><%= challan.student.name %> <span class="badge">Roll #<%= challan.student.rollNumber %></span></h3>
+      <div class="row"><span class="label">Class / Section</span><span class="value"><%= challan.student.className %> - <%= challan.student.section %></span></div>
+      <div class="row"><span class="label">Guardian</span><span class="value"><%= challan.student.guardianName %></span></div>
+      <div class="row"><span class="label">Month</span><span class="value"><%= challan.month %></span></div>
+      <div class="row"><span class="label">Tuition</span><span class="value">PKR <%= challan.tuitionAmount.toLocaleString() %></span></div>
+      <div class="row"><span class="label">Fine</span><span class="value">PKR <%= challan.fineAmount.toLocaleString() %></span></div>
+      <div class="row total-row"><span class="label">Total Due</span><span class="value">PKR <%= challan.totalAmount.toLocaleString() %></span></div>
+      <div class="row"><span class="label">Due Date</span><span class="value"><%= challan.dueDate.toDateString() %></span></div>
+      <div class="row"><span class="label">Status</span><span class="badge status-<%= challan.status.toLowerCase() %>"><%= challan.status %></span></div>
+    </div>
+
+    <button class="btn btn-primary no-print" data-print style="margin-top:24px;">Print This Challan</button>
+  </div>
+  <script src="/js/main.js"></script>
+</body>
+</html>

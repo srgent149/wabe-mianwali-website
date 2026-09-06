@@ -1,0 +1,76 @@
+<div class="admin-topline"><h2>Fee Challans</h2></div>
+
+<div class="grid grid-2">
+  <div class="admin-panel">
+    <h3>Add Student</h3>
+    <form action="/admin/fee-challans/students" method="POST">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <div class="field"><label>Roll Number</label><input type="text" name="rollNumber" required /></div>
+      <div class="field"><label>Full Name</label><input type="text" name="name" required /></div>
+      <div class="field">
+        <label>Class</label>
+        <select name="className" required>
+          <% classList.forEach(function(c) { %><option value="<%= c %>"><%= c %></option><% }) %>
+        </select>
+      </div>
+      <div class="field"><label>Section</label><input type="text" name="section" required /></div>
+      <div class="field"><label>Guardian Name</label><input type="text" name="guardianName" required /></div>
+      <div class="field"><label>Guardian Phone</label><input type="text" name="guardianPhone" required /></div>
+      <div class="field"><label>Guardian Email (optional)</label><input type="email" name="guardianEmail" /></div>
+      <button type="submit" class="btn btn-primary">Add Student</button>
+    </form>
+  </div>
+
+  <div class="admin-panel">
+    <h3>Create Fee Challan</h3>
+    <form action="/admin/fee-challans" method="POST">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <div class="field">
+        <label>Student</label>
+        <select name="studentId" required>
+          <% students.forEach(function(s) { %><option value="<%= s.id %>"><%= s.name %> (<%= s.rollNumber %> - <%= s.className %>)</option><% }) %>
+        </select>
+      </div>
+      <div class="field"><label>Month</label><input type="text" name="month" placeholder="e.g. September 2026" required /></div>
+      <div class="field"><label>Tuition Amount (PKR)</label><input type="number" name="tuitionAmount" min="0" required /></div>
+      <div class="field"><label>Fine Amount (PKR)</label><input type="number" name="fineAmount" min="0" value="0" /></div>
+      <div class="field"><label>Due Date</label><input type="date" name="dueDate" required /></div>
+      <div class="field">
+        <label>Status</label>
+        <select name="status">
+          <option value="Unpaid">Unpaid</option>
+          <option value="Partial">Partial</option>
+          <option value="Paid">Paid</option>
+        </select>
+      </div>
+      <div class="field"><label>Paid Date (optional)</label><input type="date" name="paidDate" /></div>
+      <div class="field"><label>Method (optional)</label><input type="text" name="method" placeholder="Cash, Bank Transfer, Online" /></div>
+      <button type="submit" class="btn btn-primary">Create Challan</button>
+    </form>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <table class="data-table">
+    <thead><tr><th>Student</th><th>Roll #</th><th>Month</th><th>Total</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      <% challans.forEach(function(c) { %>
+        <tr>
+          <td><%= c.student.name %></td>
+          <td><%= c.student.rollNumber %></td>
+          <td><%= c.month %></td>
+          <td>PKR <%= c.totalAmount.toLocaleString() %></td>
+          <td><span class="badge status-<%= c.status.toLowerCase() %>"><%= c.status %></span></td>
+          <td>
+            <a href="/fees/challan/<%= c.id %>/print" target="_blank" class="btn btn-outline btn-sm">Print</a>
+            <form action="/admin/fee-challans/<%= c.id %>/delete" method="POST" class="inline-form">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <button type="submit" class="btn btn-outline btn-sm" data-confirm="Delete this challan?">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+      <% if (!challans.length) { %><tr><td colspan="6">No challans yet.</td></tr><% } %>
+    </tbody>
+  </table>
+</div>

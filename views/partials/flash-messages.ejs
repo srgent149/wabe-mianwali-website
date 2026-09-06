@@ -1,0 +1,14 @@
+<% if (typeof flashSuccess !== 'undefined' && flashSuccess.length) { %>
+  <div class="container" style="padding-top:20px">
+    <% flashSuccess.forEach(function(msg) { %>
+      <div class="alert alert-success"><%- icon('checkCircle') %> <span><%= msg %></span></div>
+    <% }) %>
+  </div>
+<% } %>
+<% if (typeof flashError !== 'undefined' && flashError.length) { %>
+  <div class="container" style="padding-top:20px">
+    <% flashError.forEach(function(msg) { %>
+      <div class="alert alert-error"><%- icon('alertCircle') %> <span><%= msg %></span></div>
+    <% }) %>
+  </div>
+<% } %>

@@ -1,0 +1,32 @@
+<div class="admin-topline"><h2>Admission Applications</h2></div>
+
+<div class="table-wrap">
+  <table class="data-table">
+    <thead>
+      <tr><th>Student</th><th>Class</th><th>Guardian</th><th>Phone</th><th>Email</th><th>Submitted</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <% applications.forEach(function(a) { %>
+        <tr>
+          <td><%= a.studentName %></td>
+          <td><%= a.classAppliedFor %></td>
+          <td><%= a.guardianName %> (<%= a.relation %>)</td>
+          <td><%= a.phone %></td>
+          <td><%= a.email %></td>
+          <td><%= a.createdAt.toDateString() %></td>
+          <td>
+            <form action="/admin/admissions/<%= a.id %>/status" method="POST" style="display:flex; gap:6px;">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <select name="status" data-auto-submit>
+                <% ['New', 'Contacted', 'Enrolled', 'Rejected'].forEach(function(s) { %>
+                  <option value="<%= s %>" <%= a.status === s ? 'selected' : '' %>><%= s %></option>
+                <% }) %>
+              </select>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+      <% if (!applications.length) { %><tr><td colspan="7">No applications yet.</td></tr><% } %>
+    </tbody>
+  </table>
+</div>

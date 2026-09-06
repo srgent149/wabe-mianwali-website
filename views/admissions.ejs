@@ -1,0 +1,108 @@
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Admissions</span>
+      <h1>Join WABE International School, Mianwali Campus</h1>
+      <p>Follow four simple steps to enroll your child, from your first campus visit to confirmed enrollment.</p>
+    </div>
+
+    <div class="grid grid-4">
+      <div class="card reveal">
+        <div class="card-icon"><%- icon('mapPin') %></div>
+        <h4>1. Inquiry & Visit</h4>
+        <p>Reach out or book a campus visit to see classrooms and meet our team.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon green"><%- icon('checkCircle') %></div>
+        <h4>2. Assessment</h4>
+        <p>An age-appropriate assessment helps us place your child in the right class.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><%- icon('book') %></div>
+        <h4>3. Documents</h4>
+        <p>Submit the required documents listed below to complete your file.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon green"><%- icon('graduationCap') %></div>
+        <h4>4. Confirm & Enroll</h4>
+        <p>Pay the admission fee and your child is officially enrolled.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container grid grid-2" style="gap:48px; align-items:flex-start;">
+    <div class="reveal">
+      <span class="eyebrow">Eligibility</span>
+      <h2>Age Guide by Class</h2>
+      <div class="table-wrap">
+        <table class="data-table eligibility-table">
+          <thead><tr><th>Class</th><th>Typical Age</th></tr></thead>
+          <tbody>
+            <tr><td>Nursery</td><td>3 - 4 years</td></tr>
+            <tr><td>KG</td><td>4 - 5 years</td></tr>
+            <tr><td>Class 1</td><td>5 - 6 years</td></tr>
+            <tr><td>Class 2</td><td>6 - 7 years</td></tr>
+            <tr><td>Class 3</td><td>7 - 8 years</td></tr>
+            <tr><td>Class 4</td><td>8 - 9 years</td></tr>
+            <tr><td>Class 5</td><td>9 - 10 years</td></tr>
+            <tr><td>Class 6</td><td>10 - 11 years</td></tr>
+            <tr><td>Class 7</td><td>11 - 12 years</td></tr>
+            <tr><td>Class 8</td><td>12 - 13 years</td></tr>
+            <tr><td>Class 9</td><td>13 - 14 years</td></tr>
+            <tr><td>Class 10</td><td>14 - 15 years</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">Required Documents</span>
+      <h2>Checklist</h2>
+      <ul class="pillars-icon-list">
+        <li><%- icon('check') %> Child's B-Form / CNIC copy</li>
+        <li><%- icon('check') %> Two recent passport-size photographs</li>
+        <li><%- icon('check') %> Previous school leaving certificate (if applicable)</li>
+        <li><%- icon('check') %> Latest report card / progress report (if applicable)</li>
+        <li><%- icon('check') %> Guardian CNIC copy</li>
+        <li><%- icon('check') %> Proof of residence</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tinted">
+  <div class="container" style="max-width:820px;">
+    <div class="section-head">
+      <span class="eyebrow">Apply Online</span>
+      <h2>Admission Application Form</h2>
+    </div>
+
+    <% if (typeof submitted !== 'undefined' && submitted) { %>
+      <div class="alert alert-success">
+        <%- icon('checkCircle') %>
+        <span>Thank you! Your application has been received. Our admissions team will contact you shortly to schedule the next steps. A confirmation email has been sent to your address.</span>
+      </div>
+    <% } %>
+
+    <div class="card">
+      <form action="/admissions" method="POST" novalidate>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <div class="form-grid">
+          <%- include('partials/form-field', { type: 'text', name: 'studentName', label: 'Student Full Name', value: formValues.studentName, error: errors.studentName }) %>
+          <%- include('partials/form-field', { type: 'date', name: 'dob', label: 'Date of Birth', value: formValues.dob, error: errors.dob }) %>
+          <%- include('partials/form-field', { type: 'select', name: 'gender', label: 'Gender', value: formValues.gender, error: errors.gender, options: ['Male', 'Female'] }) %>
+          <%- include('partials/form-field', { type: 'select', name: 'classAppliedFor', label: 'Class Applying For', value: formValues.classAppliedFor, error: errors.classAppliedFor, options: classList }) %>
+          <%- include('partials/form-field', { type: 'text', name: 'previousSchool', label: 'Previous School', value: formValues.previousSchool, error: errors.previousSchool, required: false }) %>
+          <%- include('partials/form-field', { type: 'text', name: 'guardianName', label: 'Guardian Name', value: formValues.guardianName, error: errors.guardianName }) %>
+          <%- include('partials/form-field', { type: 'text', name: 'relation', label: 'Relation to Student', value: formValues.relation, error: errors.relation, placeholder: 'e.g. Father, Mother, Guardian' }) %>
+          <%- include('partials/form-field', { type: 'tel', name: 'phone', label: 'Phone Number', value: formValues.phone, error: errors.phone, placeholder: '03XX-XXXXXXX' }) %>
+          <%- include('partials/form-field', { type: 'email', name: 'email', label: 'Email Address', value: formValues.email, error: errors.email }) %>
+          <%- include('partials/form-field', { type: 'text', name: 'address', label: 'Address', value: formValues.address, error: errors.address, full: true }) %>
+          <%- include('partials/form-field', { type: 'textarea', name: 'notes', label: 'Additional Notes', value: formValues.notes, error: errors.notes, required: false, full: true }) %>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Submit Application</button>
+      </form>
+    </div>
+  </div>
+</section>

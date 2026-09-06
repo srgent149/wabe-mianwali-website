@@ -1,0 +1,50 @@
+<div class="admin-topline"><h2>Events & News</h2></div>
+
+<div class="admin-panel">
+  <h3 id="form-title">Add / Edit Event or News Item</h3>
+  <form action="/admin/events" method="POST" id="ev-form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <input type="hidden" name="id" id="ev-id" value="" />
+    <div class="form-grid">
+      <div class="field"><label>Title</label><input type="text" name="title" id="ev-title" required /></div>
+      <div class="field">
+        <label>Type</label>
+        <select name="type" id="ev-type">
+          <option value="Event">Event</option>
+          <option value="News">News</option>
+        </select>
+      </div>
+      <div class="field"><label>Date</label><input type="date" name="eventDate" id="ev-eventDate" required /></div>
+      <div class="field">
+        <label><input type="checkbox" name="isPublished" id="ev-isPublished" checked style="width:auto; display:inline-block;" /> Published (visible on public site)</label>
+      </div>
+      <div class="field full"><label>Description</label><textarea name="description" id="ev-description" required></textarea></div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-outline" data-reset-form="ev-form" data-reset-id="ev-id">Clear</button>
+  </form>
+</div>
+
+<div class="table-wrap">
+  <table class="data-table">
+    <thead><tr><th>Title</th><th>Type</th><th>Date</th><th>Published</th><th></th></tr></thead>
+    <tbody>
+      <% events.forEach(function(e) { %>
+        <tr>
+          <td><%= e.title %></td>
+          <td><%= e.type %></td>
+          <td><%= e.eventDate.toDateString() %></td>
+          <td><%= e.isPublished ? 'Yes' : 'No' %></td>
+          <td style="white-space:nowrap;">
+            <% var evEditData = { id: e.id, title: e.title, type: e.type, eventDate: e.eventDate.toISOString().slice(0,10), isPublished: e.isPublished, description: e.description }; %>
+            <button type="button" class="btn btn-outline btn-sm" data-edit-entity="ev" data-checkbox-fields="isPublished" data-record='<%- JSON.stringify(evEditData).split("'").join("&#39;") %>'>Edit</button>
+            <form action="/admin/events/<%= e.id %>/delete" method="POST" class="inline-form">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <button type="submit" class="btn btn-outline btn-sm" data-confirm="Delete this item?">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

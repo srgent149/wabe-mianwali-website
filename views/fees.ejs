@@ -1,0 +1,92 @@
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Fees</span>
+      <h1>Fee Structure & Challan Lookup</h1>
+      <p>Review class-wise fees below, or look up a specific student's fee and fine challan.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Class</th><th>Admission Fee</th><th>Monthly Tuition</th><th>Exam Fee</th></tr>
+        </thead>
+        <tbody>
+          <% feeStructures.forEach(function(fs) { %>
+            <tr>
+              <td><%= fs.className %></td>
+              <td class="mono">PKR <%= fs.admissionFee.toLocaleString() %></td>
+              <td class="mono">PKR <%= fs.monthlyTuition.toLocaleString() %></td>
+              <td class="mono">PKR <%= fs.examFee.toLocaleString() %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container grid grid-2" style="gap:48px; align-items:flex-start;">
+    <div class="reveal">
+      <span class="eyebrow">Challan Lookup</span>
+      <h2>Find Your Fee & Fine Challan</h2>
+      <div class="card">
+        <form action="/fees/challan" method="POST" novalidate>
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <%- include('partials/form-field', { type: 'select', name: 'className', label: 'Class', value: formValues.className, error: errors.className, options: classList }) %>
+          <%- include('partials/form-field', { type: 'text', name: 'rollNumber', label: 'Roll Number', value: formValues.rollNumber, error: errors.rollNumber, placeholder: 'e.g. WM-1001' }) %>
+          <button type="submit" class="btn btn-primary btn-block">Find Challan</button>
+        </form>
+      </div>
+
+      <% if (searched) { %>
+        <% if (result) { %>
+          <div class="card challan-card reveal" style="margin-top:24px;">
+            <h3><%= result.student.name %> <span class="badge">Roll #<%= result.student.rollNumber %></span></h3>
+            <div class="row"><span class="label">Class / Section</span><span class="value"><%= result.student.className %> - <%= result.student.section %></span></div>
+            <div class="row"><span class="label">Month</span><span class="value"><%= result.challan.month %></span></div>
+            <div class="row"><span class="label">Tuition</span><span class="value">PKR <%= result.challan.tuitionAmount.toLocaleString() %></span></div>
+            <div class="row"><span class="label">Fine</span><span class="value">PKR <%= result.challan.fineAmount.toLocaleString() %></span></div>
+            <div class="row total-row"><span class="label">Total Due</span><span class="value">PKR <%= result.challan.totalAmount.toLocaleString() %></span></div>
+            <div class="row"><span class="label">Due Date</span><span class="value"><%= result.challan.dueDate.toDateString() %></span></div>
+            <div class="row">
+              <span class="label">Status</span>
+              <span class="badge status-<%= result.challan.status.toLowerCase() %>"><%= result.challan.status %></span>
+            </div>
+            <a href="/fees/challan/<%= result.challan.id %>/print" target="_blank" class="btn btn-secondary btn-block" style="margin-top:16px;">
+              <%- icon('printer') %> Print / Save Challan
+            </a>
+          </div>
+        <% } else { %>
+          <div class="alert alert-error reveal" style="margin-top:24px;">
+            <%- icon('alertCircle') %>
+            <span>No challan found for that class and roll number. Please double-check the details or contact the school office.</span>
+          </div>
+        <% } %>
+      <% } %>
+    </div>
+
+    <div class="reveal">
+      <span class="eyebrow">Payments</span>
+      <h2>Payment Methods & Policy</h2>
+      <div class="card">
+        <h4>Accepted Payment Methods</h4>
+        <ul class="pillars-icon-list">
+          <li><%- icon('check') %> Cash at the school office</li>
+          <li><%- icon('check') %> Bank transfer to the school account</li>
+          <li><%- icon('check') %> Online payment (where available)</li>
+        </ul>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <h4>Fee Policy Notes</h4>
+        <ul class="pillars-icon-list">
+          <li><%- icon('check') %> Fees are due by the 10th of each month.</li>
+          <li><%- icon('check') %> A late fine applies to payments made after the due date.</li>
+          <li><%- icon('check') %> Admission fee is charged once, at the time of enrollment.</li>
+          <li><%- icon('check') %> Exam fees are charged per term.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

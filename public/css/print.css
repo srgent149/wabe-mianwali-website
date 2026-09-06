@@ -1,0 +1,15 @@
+@media print {
+  .no-print,
+  .whatsapp-fab,
+  .site-header,
+  .site-footer,
+  .topbar {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  .print-challan-page {
+    margin: 0 auto;
+  }
+}

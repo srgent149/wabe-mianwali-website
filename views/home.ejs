@@ -1,0 +1,153 @@
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow" style="color:var(--green-100)">Nursery &mdash; Class 10 &bull; Federal Board</span>
+      <h1>Do School Differently</h1>
+      <p class="lede"><%= school.tagline %>. WABE International School, Mianwali Campus blends academic rigor with digital learning, scientific inquiry, and confident communication &mdash; so every student is ready for what's next.</p>
+      <div class="hero-actions">
+        <a href="/admissions" class="btn btn-secondary">Apply for Admission</a>
+        <a href="/academics" class="btn btn-outline-light">Explore Academics</a>
+      </div>
+    </div>
+    <div class="hero-panel reveal">
+      <span class="brand-badge"><img src="/images/logo.jpg" alt="<%= school.name %> logo" /></span>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="num"><%= studentCount %>+</div>
+          <div class="label">Active Students</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num"><%= facultyCount %></div>
+          <div class="label">Faculty Members</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">95%</div>
+          <div class="label">Result Rate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Our Six Pillars</span>
+      <h2>What Every WABE Student Builds</h2>
+      <p>Rooted in our crest, these six pillars shape every lesson, club, and assessment at WABE Mianwali.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card reveal">
+        <div class="card-icon"><%- icon('graduationCap') %></div>
+        <h3>Academic Excellence</h3>
+        <p>Rigorous, Federal Board-aligned instruction with continuous assessment and remedial support.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><%- icon('laptop') %></div>
+        <h3>Digital Learning</h3>
+        <p>Computer science and digital literacy woven into the curriculum from an early age.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><%- icon('microscope') %></div>
+        <h3>Scientific Inquiry</h3>
+        <p>Hands-on lab work and experiments that turn curiosity into a habit of investigation.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><%- icon('mic') %></div>
+        <h3>Confident Communication</h3>
+        <p>Debate, presentation, and language skills built through daily classroom practice.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><%- icon('bulb') %></div>
+        <h3>Curiosity & Innovation</h3>
+        <p>Project-based learning that rewards asking "why" and "what if."</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><%- icon('globe') %></div>
+        <h3>Global Citizenship</h3>
+        <p>An awareness of community, culture, and the wider world beyond Mianwali.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container grid grid-2" style="align-items:center; gap:48px;">
+    <div class="reveal">
+      <span class="eyebrow">Our Campus</span>
+      <h2>A Calm, Purpose-Built Learning Environment</h2>
+      <p>WABE International School, Mianwali Campus was built around the idea that a school should feel considered &mdash; light-filled classrooms, dedicated science labs, a digital learning lab, and space to play, all under one roof.</p>
+      <ul class="pillars-icon-list">
+        <li><%- icon('check') %> Purpose-built classrooms for Nursery through Class 10</li>
+        <li><%- icon('check') %> Dedicated science and computer labs</li>
+        <li><%- icon('check') %> A library and reading corner for every age group</li>
+        <li><%- icon('check') %> On-campus guidance and counseling support</li>
+      </ul>
+      <a href="/about" class="btn btn-outline">More About Us</a>
+    </div>
+    <div class="gallery-tile theme-blue reveal">
+      <%- icon('building') %>
+      <span class="cap">Campus Photography Coming Soon</span>
+      <span class="placeholder-note">Placeholder &mdash; to be replaced with real campus photos</span>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tinted">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Academic Stages</span>
+      <h2>A Clear Path from Nursery to Matriculation</h2>
+    </div>
+    <div class="grid grid-4">
+      <% stagePreview.forEach(function(stage) { %>
+        <div class="card stage-card reveal">
+          <div class="card-icon green"><%- icon('book') %></div>
+          <h4><%= stage.label %></h4>
+          <ul class="subjects">
+            <% stage.subjects.forEach(function(subj) { %><li><%= subj %></li><% }) %>
+          </ul>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Testimonials</span>
+      <h2>What Our Community Says</h2>
+      <p style="font-size:0.85rem; color:var(--muted);">Illustrative quotes shown while we collect verified parent and student testimonials.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card testimonial reveal">
+        <p>"The teachers genuinely know each child. My son looks forward to school every single day."</p>
+        <div class="who">&mdash; Parent, Class 3 <span class="badge" style="margin-left:6px;">Illustrative</span></div>
+      </div>
+      <div class="card testimonial reveal">
+        <p>"The science labs and digital classes make learning feel hands-on instead of just memorizing."</p>
+        <div class="who">&mdash; Parent, Class 7 <span class="badge" style="margin-left:6px;">Illustrative</span></div>
+      </div>
+      <div class="card testimonial reveal">
+        <p>"Our daughter has become so much more confident speaking in front of others since joining WABE."</p>
+        <div class="who">&mdash; Parent, Class 5 <span class="badge" style="margin-left:6px;">Illustrative</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-band reveal">
+      <div>
+        <h2>Admissions Are Open</h2>
+        <p>Book a campus visit or start your online application today.</p>
+      </div>
+      <div class="cta-band-actions">
+        <a href="/admissions" class="btn" style="background:var(--white); color:var(--green-700);">Apply Now</a>
+        <a href="/contact" class="btn btn-outline-light">Book a Visit</a>
+      </div>
+    </div>
+  </div>
+</section>

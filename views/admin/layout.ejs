@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> - Admin - WABE Mianwali</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body class="admin-body">
+  <% if (typeof bare !== 'undefined' && bare) { %>
+    <%- body %>
+  <% } else { %>
+    <div class="admin-shell">
+      <aside class="admin-sidebar">
+        <div class="brand-name">WABE Admin</div>
+        <nav>
+          <a href="/admin" class="<%= currentPath === '/admin' ? 'active' : '' %>">Dashboard</a>
+          <a href="/admin/admissions" class="<%= currentPath.startsWith('/admin/admissions') ? 'active' : '' %>">Admissions</a>
+          <a href="/admin/job-applications" class="<%= currentPath.startsWith('/admin/job-applications') ? 'active' : '' %>">Job Applications</a>
+          <a href="/admin/contact-messages" class="<%= currentPath.startsWith('/admin/contact-messages') ? 'active' : '' %>">Contact Messages</a>
+          <a href="/admin/fee-structures" class="<%= currentPath.startsWith('/admin/fee-structures') ? 'active' : '' %>">Fee Structure</a>
+          <a href="/admin/fee-challans" class="<%= currentPath.startsWith('/admin/fee-challans') ? 'active' : '' %>">Fee Challans</a>
+          <a href="/admin/job-openings" class="<%= currentPath.startsWith('/admin/job-openings') ? 'active' : '' %>">Job Openings</a>
+          <a href="/admin/faculty" class="<%= currentPath.startsWith('/admin/faculty') ? 'active' : '' %>">Faculty</a>
+          <a href="/admin/events" class="<%= currentPath.startsWith('/admin/events') ? 'active' : '' %>">Events & News</a>
+          <a href="/admin/journal" class="<%= currentPath.startsWith('/admin/journal') ? 'active' : '' %>">Journal Issues</a>
+          <a href="/admin/gallery" class="<%= currentPath.startsWith('/admin/gallery') ? 'active' : '' %>">Gallery Categories</a>
+          <a href="/" target="_blank">View Public Site &rarr;</a>
+        </nav>
+        <form action="/admin/logout" method="POST">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button type="submit" class="btn btn-outline-light btn-sm btn-block">Log Out</button>
+        </form>
+      </aside>
+      <main class="admin-main">
+        <%- include('../partials/flash-messages') %>
+        <%- body %>
+      </main>
+    </div>
+  <% } %>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

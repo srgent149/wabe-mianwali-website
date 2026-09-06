@@ -1,0 +1,31 @@
+<div class="admin-topline"><h2>Contact Messages</h2></div>
+
+<div class="table-wrap">
+  <table class="data-table">
+    <thead>
+      <tr><th>Name</th><th>Reason</th><th>Phone</th><th>Email</th><th>Message</th><th>Received</th><th>Read</th><th></th></tr>
+    </thead>
+    <tbody>
+      <% messages.forEach(function(m) { %>
+        <tr>
+          <td><%= m.name %></td>
+          <td><%= m.reason %></td>
+          <td><%= m.phone %></td>
+          <td><%= m.email %></td>
+          <td style="max-width:280px;"><%= m.message %></td>
+          <td><%= m.createdAt.toDateString() %></td>
+          <td><span class="badge <%= m.isRead ? 'green' : '' %>"><%= m.isRead ? 'Read' : 'Unread' %></span></td>
+          <td>
+            <% if (!m.isRead) { %>
+              <form action="/admin/contact-messages/<%= m.id %>/read" method="POST" class="inline-form">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button type="submit" class="btn btn-outline btn-sm">Mark Read</button>
+              </form>
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+      <% if (!messages.length) { %><tr><td colspan="8">No messages yet.</td></tr><% } %>
+    </tbody>
+  </table>
+</div>

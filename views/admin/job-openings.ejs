@@ -1,0 +1,50 @@
+<div class="admin-topline"><h2>Job Openings</h2></div>
+
+<div class="admin-panel">
+  <h3 id="form-title">Add / Edit Job Opening</h3>
+  <form action="/admin/job-openings" method="POST" id="jo-form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <input type="hidden" name="id" id="jo-id" value="" />
+    <div class="form-grid">
+      <div class="field"><label>Title</label><input type="text" name="title" id="jo-title" required /></div>
+      <div class="field"><label>Department</label><input type="text" name="department" id="jo-department" required /></div>
+      <div class="field">
+        <label>Type</label>
+        <select name="type" id="jo-type">
+          <option value="Full-time">Full-time</option>
+          <option value="Part-time">Part-time</option>
+        </select>
+      </div>
+      <div class="field"><label>Display Order</label><input type="number" name="displayOrder" id="jo-displayOrder" value="0" /></div>
+      <div class="field full"><label>Requirements</label><textarea name="requirements" id="jo-requirements" required></textarea></div>
+      <div class="field">
+        <label><input type="checkbox" name="isActive" id="jo-isActive" checked style="width:auto; display:inline-block;" /> Active (visible on public site)</label>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-outline" data-reset-form="jo-form" data-reset-id="jo-id">Clear</button>
+  </form>
+</div>
+
+<div class="table-wrap">
+  <table class="data-table">
+    <thead><tr><th>Title</th><th>Department</th><th>Type</th><th>Active</th><th></th></tr></thead>
+    <tbody>
+      <% jobOpenings.forEach(function(j) { %>
+        <tr>
+          <td><%= j.title %></td>
+          <td><%= j.department %></td>
+          <td><%= j.type %></td>
+          <td><%= j.isActive ? 'Yes' : 'No' %></td>
+          <td style="white-space:nowrap;">
+            <button type="button" class="btn btn-outline btn-sm" data-edit-entity="jo" data-checkbox-fields="isActive" data-record='<%- JSON.stringify(j).split("'").join("&#39;") %>'>Edit</button>
+            <form action="/admin/job-openings/<%= j.id %>/delete" method="POST" class="inline-form">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <button type="submit" class="btn btn-outline btn-sm" data-confirm="Delete this job opening?">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

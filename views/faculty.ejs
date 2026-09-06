@@ -1,0 +1,49 @@
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Our Team</span>
+      <h1>Meet Our Faculty</h1>
+      <p>Experienced, subject-qualified teachers and administrators leading every classroom at WABE Mianwali.</p>
+    </div>
+
+    <div class="faculty-filter">
+      <button type="button" data-faculty-filter="all" class="active">All Departments</button>
+      <% departments.forEach(function(dept) { %>
+        <button type="button" data-faculty-filter="<%= dept %>"><%= dept %></button>
+      <% }) %>
+    </div>
+
+    <div class="grid grid-4">
+      <% faculty.forEach(function(f) { %>
+        <div class="card faculty-card reveal" data-faculty-department="<%= f.department %>">
+          <div class="avatar">
+            <% if (f.photoPath) { %>
+              <img src="<%= f.photoPath %>" alt="<%= f.name %>" />
+            <% } else { %>
+              <%= f.name.split(' ').filter(function(w){ return w[0] === w[0].toUpperCase(); }).slice(0,2).map(function(w){ return w[0]; }).join('') %>
+            <% } %>
+          </div>
+          <h4><%= f.name %></h4>
+          <p style="color:var(--green-700); font-weight:600; font-size:0.88rem;"><%= f.role %></p>
+          <p style="font-size:0.85rem; color:var(--muted);"><%= f.department %></p>
+          <p style="font-size:0.82rem;"><%= f.qualification %></p>
+          <span class="badge"><%= f.yearsExperience %> yrs experience</span>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-band reveal">
+      <div>
+        <h2>Want to Join Our Team?</h2>
+        <p>We're always looking for passionate educators who want to do school differently.</p>
+      </div>
+      <div class="cta-band-actions">
+        <a href="/careers" class="btn" style="background:var(--white); color:var(--green-700);">View Open Positions</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,46 @@
+<div class="admin-topline">
+  <h2>Dashboard</h2>
+  <span style="color:var(--muted); font-size:0.85rem;">Logged in as <%= admin.email %></span>
+</div>
+
+<div class="admin-stat-grid">
+  <div class="admin-stat"><div class="num"><%= stats.applications %></div><div class="label">Admission Applications</div></div>
+  <div class="admin-stat"><div class="num"><%= stats.jobApplications %></div><div class="label">Job Applications</div></div>
+  <div class="admin-stat"><div class="num"><%= stats.contactMessages %></div><div class="label">Unread Messages</div></div>
+  <div class="admin-stat"><div class="num"><%= stats.students %></div><div class="label">Students on File</div></div>
+  <div class="admin-stat"><div class="num"><%= stats.feeChallans %></div><div class="label">Unpaid Challans</div></div>
+</div>
+
+<div class="grid grid-2">
+  <div class="admin-panel">
+    <h3>Recent Admission Applications</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Student</th><th>Class</th><th>Status</th></tr></thead>
+        <tbody>
+          <% recentAdmissions.forEach(function(a) { %>
+            <tr><td><%= a.studentName %></td><td><%= a.classAppliedFor %></td><td><span class="badge"><%= a.status %></span></td></tr>
+          <% }) %>
+          <% if (!recentAdmissions.length) { %><tr><td colspan="3">No applications yet.</td></tr><% } %>
+        </tbody>
+      </table>
+    </div>
+    <a href="/admin/admissions" class="btn btn-outline btn-sm" style="margin-top:14px;">View All</a>
+  </div>
+
+  <div class="admin-panel">
+    <h3>Recent Contact Messages</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Name</th><th>Reason</th><th>Read</th></tr></thead>
+        <tbody>
+          <% recentMessages.forEach(function(m) { %>
+            <tr><td><%= m.name %></td><td><%= m.reason %></td><td><%= m.isRead ? 'Yes' : 'No' %></td></tr>
+          <% }) %>
+          <% if (!recentMessages.length) { %><tr><td colspan="3">No messages yet.</td></tr><% } %>
+        </tbody>
+      </table>
+    </div>
+    <a href="/admin/contact-messages" class="btn btn-outline btn-sm" style="margin-top:14px;">View All</a>
+  </div>
+</div>

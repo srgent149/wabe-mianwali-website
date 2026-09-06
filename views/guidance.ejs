@@ -1,0 +1,82 @@
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Guidance & Development</span>
+      <h1>Supporting Students and Staff, Beyond the Curriculum</h1>
+      <p>Career counseling for students, youth development programs, and ongoing professional development for our teaching staff.</p>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <a href="/guidance?tab=counseling" class="tab-link <%= tab === 'counseling' ? 'active' : '' %>">Career Counseling</a>
+      <a href="/guidance?tab=youth" class="tab-link <%= tab === 'youth' ? 'active' : '' %>">Youth Development</a>
+      <a href="/guidance?tab=pd" class="tab-link <%= tab === 'pd' ? 'active' : '' %>">Professional Development</a>
+    </div>
+
+    <% if (tab === 'counseling') { %>
+      <div class="grid grid-2" style="align-items:center; gap:40px;">
+        <div class="reveal">
+          <h2>Career Counseling for Students</h2>
+          <p>For students in Classes 8-10, our guidance counselor offers one-on-one sessions to help think through subject choices, strengths, and future academic paths.</p>
+          <h4>What a Session Covers</h4>
+          <ul class="pillars-icon-list">
+            <li><%- icon('check') %> Understanding personal strengths and interests</li>
+            <li><%- icon('check') %> Subject and stream guidance for higher secondary</li>
+            <li><%- icon('check') %> Study skills and exam preparation strategies</li>
+            <li><%- icon('check') %> A safe space to talk through academic worries</li>
+          </ul>
+          <a href="/contact?reason=Career%20Counseling%20Session" class="btn btn-secondary">Book a Counseling Session</a>
+        </div>
+        <div class="gallery-tile theme-green reveal">
+          <%- icon('compass') %>
+          <span class="cap">One-on-One Guidance</span>
+        </div>
+      </div>
+    <% } else if (tab === 'youth') { %>
+      <div class="grid grid-4">
+        <div class="card reveal">
+          <div class="card-icon"><%- icon('users') %></div>
+          <h4>Student Council</h4>
+          <p>Elected student representatives who voice peer concerns and help organize school events.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon green"><%- icon('heart') %></div>
+          <h4>Community Service Club</h4>
+          <p>Regular service projects that connect students with the wider Mianwali community.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><%- icon('bulb') %></div>
+          <h4>Life-Skills Workshops</h4>
+          <p>Practical sessions on communication, teamwork, time management, and digital citizenship.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon green"><%- icon('award') %></div>
+          <h4>Leadership Camp</h4>
+          <p>An annual camp building confidence, collaboration, and leadership skills.</p>
+        </div>
+      </div>
+    <% } else if (tab === 'pd') { %>
+      <div class="grid grid-4">
+        <div class="card reveal">
+          <div class="card-icon"><%- icon('calendar') %></div>
+          <h4>Monthly Training Workshops</h4>
+          <p>Regular pedagogy and subject-specific workshops for all teaching staff.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon green"><%- icon('users') %></div>
+          <h4>Peer Classroom Observation</h4>
+          <p>Structured peer observation to share techniques and give constructive feedback.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><%- icon('graduationCap') %></div>
+          <h4>New Teacher Mentorship</h4>
+          <p>Every new teacher is paired with a senior mentor for their first academic year.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon green"><%- icon('award') %></div>
+          <h4>External Certifications</h4>
+          <p>Support and sponsorship for teachers pursuing relevant external certifications.</p>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</section>
