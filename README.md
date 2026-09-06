@@ -132,14 +132,14 @@ This is how the live site (`thewabeinternationalschoolmianwali.com`) is deployed
 1. **GitHub**: the repo is pushed to GitHub; Hostinger's Web App is connected to it directly and auto-deploys on every push to `master`.
 2. **Database**: a Supabase project provides PostgreSQL, connected via Hostinger's Web Apps "Connect a database" flow.
 3. **Environment variables**: set in the Web App's **Environment variables** panel in hPanel — `DATABASE_URL`, `DIRECT_URL` (from Supabase, see above), `SESSION_SECRET` (a long random string), `SCHOOL_*` contact details, `SMTP_*` if sending real email, and `ADMIN_SEED_EMAIL` / `ADMIN_SEED_PASSWORD`. `NODE_ENV=production`.
-4. **Start command**: `npm start` runs `prisma migrate deploy && node src/app.js` — every deploy automatically applies any pending migrations before the server boots, so no manual migration step is needed after the first one.
-5. **First-time database setup**: the very first migration has to be created (not just applied) against the new Supabase database — run this once from a machine with the repo and real credentials:
+4. **Prisma engine**: Hostinger's Web App hosting doesn't tolerate Prisma's native Rust query engine — the "library" engine panics when the host freezes idle processes, and the "binary" engine fails to initialize (subprocess spawning appears restricted). The client is configured to use [driver adapters](https://www.prisma.io/docs/orm/overview/databases/database-drivers#driver-adapters) instead (`@prisma/adapter-pg` + `pg`), which talk to Postgres directly with no native engine involved. See `src/config/prisma.js` and the `generator client` block in `schema.prisma`.
+5. **Start command**: `npm start` just runs `node src/app.js` — no automatic `prisma migrate deploy` on boot. On this host, that command uses Prisma's separate migration engine (also native/Rust), which hung the entire startup with no logs when tried automatically. Instead, run migrations manually from a machine with real credentials whenever the schema changes (see below), then deploy the app code separately.
+6. **First-time / any-time database migrations**: run from a machine with the repo, Node, and real Supabase credentials (never from the Hostinger environment itself):
    ```bash
-   npx prisma migrate dev --name init_postgres
-   npm run seed:admin
+   npx prisma migrate dev --name <description>
    ```
-   Commit and push the generated `prisma/migrations/` folder — that's what lets `prisma migrate deploy` apply the same schema automatically on every future deploy. `seed:admin` creates just the admin login (no demo data) — see "Everyday Commands".
-6. **DNS**: already handled by Hostinger automatically as long as the domain uses Hostinger's nameservers.
+   Commit and push the generated `prisma/migrations/` folder, then push the rest of the code — Hostinger auto-deploys, and the app boots straight into `node src/app.js` against the already-migrated database. For a brand-new database, this same command both creates the migration and applies it; `npm run seed:admin` then creates just the admin login (no demo data) — see "Everyday Commands".
+7. **DNS**: already handled by Hostinger automatically as long as the domain uses Hostinger's nameservers.
 
 For a plain VPS instead: install Node.js + PostgreSQL, clone the repo, follow the same env/migrate/start steps, and run the app under a process manager such as PM2 (`pm2 start src/app.js --name wabe-mianwali`) behind an Nginx reverse proxy for TLS termination.
 
