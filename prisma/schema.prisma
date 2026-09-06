@@ -12,6 +12,11 @@ datasource db {
 
 generator client {
   provider      = "prisma-client-js"
+  // "binary" runs the query engine as a separate OS process instead of an
+  // embedded worker thread. Hostinger freezes idle app processes to save
+  // resources; the default "library" engine's embedded async runtime
+  // doesn't survive that freeze/resume cycle (PANIC: timer has gone away).
+  engineType    = "binary"
   // "native" covers local dev (Windows/Mac); the rest cover common Linux
   // hosting runtimes so the correct query engine binary is downloaded
   // regardless of which base image Hostinger's build/runtime containers use.
