@@ -5,12 +5,14 @@
   "private": true,
   "main": "src/app.js",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "prisma migrate deploy && node src/app.js",
     "dev": "nodemon src/app.js",
+    "postinstall": "prisma generate",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:deploy": "prisma migrate deploy",
     "seed": "node prisma/seed.js",
+    "seed:admin": "node prisma/seedAdminOnly.js",
     "lint": "eslint \"src/**/*.js\" \"prisma/**/*.js\"",
     "format": "prettier --write \"src/**/*.js\" \"public/css/**/*.css\" \"prisma/**/*.js\""
   },

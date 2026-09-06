@@ -1,13 +1,13 @@
 // WABE International School, Mianwali Campus
-// Using SQLite for zero-setup local development.
-// For production, switch provider to "postgresql" and set DATABASE_URL
-// to a Postgres connection string (see README.md "Deployment" section) —
-// the schema below uses only types/features supported by both providers,
-// so migrating is just: change provider, update DATABASE_URL, re-run migrate.
+// Production database: PostgreSQL (Supabase). DATABASE_URL is the pooled
+// connection (used by the running app), DIRECT_URL is the direct connection
+// (used only by `prisma migrate` — pooled connections don't support the
+// prepared statements migrations need). See README.md "Deployment" section.
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 generator client {
