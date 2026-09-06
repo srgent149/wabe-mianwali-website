@@ -13,7 +13,10 @@
       </div>
       <div class="card contact-info-card reveal">
         <div class="card-icon green"><%- icon('phone') %></div>
-        <div><h4>Phone</h4><p><a href="tel:<%= school.phone.replace(/\s+/g, '') %>"><%= school.phone %></a></p></div>
+        <div><h4>Phone</h4><p>
+          <a href="tel:<%= school.phone.replace(/\s+/g, '') %>"><%= school.phone %></a> /
+          <a href="tel:<%= school.phoneSecondary.replace(/\s+/g, '') %>"><%= school.phoneSecondary %></a>
+        </p></div>
       </div>
       <div class="card contact-info-card reveal">
         <div class="card-icon"><%- icon('mail') %></div>

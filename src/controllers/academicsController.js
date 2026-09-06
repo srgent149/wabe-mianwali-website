@@ -10,9 +10,9 @@ const assessmentStructure = [
 
 function index(req, res) {
   res.render('academics', {
-    title: 'Academics - WABE International School, Mianwali Campus',
+    title: 'Academics - The WABE International School, Mianwali Campus',
     description:
-      'Explore the Federal Board curriculum, subjects, and assessment structure at WABE International School, Mianwali Campus, from Nursery through Class 10.',
+      'Explore the Federal Board curriculum, subjects, and assessment structure at The WABE International School, Mianwali Campus, from Nursery through Class 10.',
     syllabus,
     assessmentStructure,
   });

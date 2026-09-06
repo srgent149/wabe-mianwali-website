@@ -4,8 +4,8 @@ const emailService = require('../services/emailService');
 
 function index(req, res) {
   res.render('contact', {
-    title: 'Contact Us - WABE International School, Mianwali Campus',
-    description: 'Get in touch with WABE International School, Mianwali Campus - address, phone, office hours, and an online contact form.',
+    title: 'Contact Us - The WABE International School, Mianwali Campus',
+    description: 'Get in touch with The WABE International School, Mianwali Campus - address, phone, office hours, and an online contact form.',
     reasons: CONTACT_REASONS,
     formValues: { reason: req.query.reason || '' },
     errors: {},
@@ -28,8 +28,8 @@ async function submit(req, res, next) {
     emailService.sendContactEmails(message).catch((e) => console.error('Contact email failed:', e));
 
     res.render('contact', {
-      title: 'Contact Us - WABE International School, Mianwali Campus',
-      description: 'Get in touch with WABE International School, Mianwali Campus.',
+      title: 'Contact Us - The WABE International School, Mianwali Campus',
+      description: 'Get in touch with The WABE International School, Mianwali Campus.',
       reasons: CONTACT_REASONS,
       formValues: {},
       errors: {},

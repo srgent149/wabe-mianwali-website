@@ -19,9 +19,9 @@ async function index(req, res, next) {
     });
 
     res.render('home', {
-      title: 'WABE International School, Mianwali Campus - Do School Differently',
+      title: 'The WABE International School, Mianwali Campus - Do School Differently',
       description:
-        'WABE International School, Mianwali Campus offers Nursery through Class 10 education under the Federal Board curriculum, focused on academic excellence, digital learning, and confident communication.',
+        'The WABE International School, Mianwali Campus offers Nursery through Class 10 education under the Federal Board curriculum, focused on academic excellence, digital learning, and confident communication.',
       studentCount,
       facultyCount,
       stagePreview,

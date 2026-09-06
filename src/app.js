@@ -100,7 +100,7 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(env.port, () => {
-  console.log(`WABE International School website running at http://localhost:${env.port}`);
+  console.log(`The WABE International School website running at http://localhost:${env.port}`);
 });
 
 module.exports = app;

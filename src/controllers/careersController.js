@@ -6,8 +6,8 @@ async function index(req, res, next) {
   try {
     const openings = await prisma.jobOpening.findMany({ where: { isActive: true }, orderBy: { displayOrder: 'asc' } });
     res.render('careers', {
-      title: 'Careers - WABE International School, Mianwali Campus',
-      description: 'Explore open teaching and administrative positions at WABE International School, Mianwali Campus.',
+      title: 'Careers - The WABE International School, Mianwali Campus',
+      description: 'Explore open teaching and administrative positions at The WABE International School, Mianwali Campus.',
       openings,
       formValues: {},
       errors: {},
@@ -28,8 +28,8 @@ async function submit(req, res, next) {
 
     const openings = await prisma.jobOpening.findMany({ where: { isActive: true }, orderBy: { displayOrder: 'asc' } });
     res.render('careers', {
-      title: 'Careers - WABE International School, Mianwali Campus',
-      description: 'Explore open teaching and administrative positions at WABE International School, Mianwali Campus.',
+      title: 'Careers - The WABE International School, Mianwali Campus',
+      description: 'Explore open teaching and administrative positions at The WABE International School, Mianwali Campus.',
       openings,
       formValues: {},
       errors: {},

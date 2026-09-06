@@ -11,8 +11,8 @@ async function index(req, res, next) {
     ]);
 
     res.render('campus-life', {
-      title: 'Campus Life - WABE International School, Mianwali Campus',
-      description: 'Explore gallery, events, news, and the school journal at WABE International School, Mianwali Campus.',
+      title: 'Campus Life - The WABE International School, Mianwali Campus',
+      description: 'Explore gallery, events, news, and the school journal at The WABE International School, Mianwali Campus.',
       tab,
       galleryCategories,
       events,
@@ -38,7 +38,7 @@ async function subscribe(req, res, next) {
 
     if (!emailValid) {
       return res.status(422).render('campus-life', {
-        title: 'Campus Life - WABE International School, Mianwali Campus',
+        title: 'Campus Life - The WABE International School, Mianwali Campus',
         description: 'Explore gallery, events, news, and the school journal.',
         tab: 'journal',
         galleryCategories,
@@ -56,7 +56,7 @@ async function subscribe(req, res, next) {
     });
 
     res.render('campus-life', {
-      title: 'Campus Life - WABE International School, Mianwali Campus',
+      title: 'Campus Life - The WABE International School, Mianwali Campus',
       description: 'Explore gallery, events, news, and the school journal.',
       tab: 'journal',
       galleryCategories,

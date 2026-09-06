@@ -7,9 +7,9 @@ async function showForm(req, res, next) {
   try {
     const feeStructures = await prisma.feeStructure.findMany({ orderBy: { displayOrder: 'asc' } });
     res.render('admissions', {
-      title: 'Admissions - WABE International School, Mianwali Campus',
+      title: 'Admissions - The WABE International School, Mianwali Campus',
       description:
-        'Start the admissions process at WABE International School, Mianwali Campus. Learn about eligibility, required documents, and apply online.',
+        'Start the admissions process at The WABE International School, Mianwali Campus. Learn about eligibility, required documents, and apply online.',
       classList: CLASS_LIST,
       feeStructures,
       formValues: {},
@@ -29,8 +29,8 @@ async function submit(req, res, next) {
 
     const feeStructures = await prisma.feeStructure.findMany({ orderBy: { displayOrder: 'asc' } });
     res.render('admissions', {
-      title: 'Admissions - WABE International School, Mianwali Campus',
-      description: 'Start the admissions process at WABE International School, Mianwali Campus.',
+      title: 'Admissions - The WABE International School, Mianwali Campus',
+      description: 'Start the admissions process at The WABE International School, Mianwali Campus.',
       classList: CLASS_LIST,
       feeStructures,
       formValues: {},

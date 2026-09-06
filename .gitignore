@@ -13,3 +13,6 @@ public/uploads/*
 
 .DS_Store
 Thumbs.db
+
+# Claude Code session artifacts
+.claude/scheduled_tasks.lock

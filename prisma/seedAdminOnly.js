@@ -3,7 +3,7 @@
 // against the live database; use `npm run seed` only for local/dev.
 require('dotenv').config();
 const { PrismaClient } = require('@prisma/client');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const prisma = new PrismaClient();
 

@@ -6,9 +6,9 @@ async function index(req, res, next) {
   try {
     const feeStructures = await prisma.feeStructure.findMany({ orderBy: { displayOrder: 'asc' } });
     res.render('fees', {
-      title: 'Fees & Challan - WABE International School, Mianwali Campus',
+      title: 'Fees & Challan - The WABE International School, Mianwali Campus',
       description:
-        'View class-wise fee structure and look up your fee & fine challan online at WABE International School, Mianwali Campus.',
+        'View class-wise fee structure and look up your fee & fine challan online at The WABE International School, Mianwali Campus.',
       classList: CLASS_LIST,
       feeStructures,
       result: null,
@@ -29,7 +29,7 @@ async function lookupChallan(req, res, next) {
     const result = await challanService.findLatestChallan(className, rollNumber || '');
 
     res.render('fees', {
-      title: 'Fees & Challan - WABE International School, Mianwali Campus',
+      title: 'Fees & Challan - The WABE International School, Mianwali Campus',
       description: 'View class-wise fee structure and look up your fee & fine challan online.',
       classList: CLASS_LIST,
       feeStructures,
