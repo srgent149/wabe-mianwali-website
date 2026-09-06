@@ -99,8 +99,8 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).render('errors/500', { title: 'Something Went Wrong', layout: 'layouts/main' });
 });
 
-app.listen(env.port, () => {
-  console.log(`The WABE International School website running at http://localhost:${env.port}`);
+app.listen(env.port, '0.0.0.0', () => {
+  console.log(`The WABE International School website running on 0.0.0.0:${env.port}`);
 });
 
 module.exports = app;
