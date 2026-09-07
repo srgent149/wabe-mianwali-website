@@ -428,6 +428,7 @@ table.data-table tbody tr:hover {
   max-width: 780px;
   margin: 0 auto;
   padding: 40px;
+  background: var(--blue-100);
   border-left-color: var(--blue-700);
 }
 .ceo-message p {
