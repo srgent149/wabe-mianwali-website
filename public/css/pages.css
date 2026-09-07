@@ -141,7 +141,9 @@
   height: 64px;
   border-radius: 10px;
   border: 1px solid var(--line);
-  object-fit: cover;
+  object-fit: contain;
+  padding: 2px;
+  background: var(--white);
 }
 .print-header h2 {
   margin: 0;
