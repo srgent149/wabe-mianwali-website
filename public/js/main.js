@@ -80,4 +80,20 @@ document.addEventListener('DOMContentLoaded', () => {
       if (select) select.value = btn.getAttribute('data-job-id');
     });
   });
+
+  // ---- Admissions popup (shows every visit; closeable) ----
+  const popup = document.getElementById('admissionsPopup');
+  const popupClose = document.getElementById('admissionsPopupClose');
+  if (popup && popupClose) {
+    const closePopup = () => {
+      popup.hidden = true;
+    };
+    popupClose.addEventListener('click', closePopup);
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup) closePopup();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePopup();
+    });
+  }
 });

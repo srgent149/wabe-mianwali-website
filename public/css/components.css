@@ -521,3 +521,56 @@ table.data-table tbody tr:hover {
 .print-only {
   display: none;
 }
+
+/* ---------- Admissions popup ---------- */
+.admissions-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 44, 76, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 20px;
+}
+.admissions-popup-overlay[hidden] {
+  display: none;
+}
+.admissions-popup-box {
+  position: relative;
+  max-width: 420px;
+  width: 100%;
+  max-height: 90vh;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: var(--white);
+}
+.admissions-popup-box img {
+  width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  display: block;
+}
+.admissions-popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--white);
+  border: none;
+  color: var(--blue-900);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  z-index: 1;
+}
+.admissions-popup-close:hover {
+  background: var(--blue-100);
+}
