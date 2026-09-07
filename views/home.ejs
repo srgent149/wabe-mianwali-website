@@ -1,29 +1,12 @@
 <section class="hero">
-  <div class="container hero-grid">
-    <div>
+  <div class="container">
+    <div class="hero-content">
       <span class="eyebrow" style="color:var(--green-100)">Nursery &mdash; Class 10 &bull; Federal Board</span>
       <h1>Do School Differently</h1>
       <p class="lede"><%= school.tagline %>. The WABE International School, Mianwali Campus blends academic rigor with digital learning, scientific inquiry, and confident communication &mdash; so every student is ready for what's next.</p>
       <div class="hero-actions">
         <a href="/admissions" class="btn btn-secondary">Apply for Admission</a>
         <a href="/academics" class="btn btn-outline-light">Explore Academics</a>
-      </div>
-    </div>
-    <div class="hero-panel reveal">
-      <span class="brand-badge"><img src="/images/logo.jpg" alt="<%= school.name %> logo" /></span>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="num"><%= studentCount %>+</div>
-          <div class="label">Active Students</div>
-        </div>
-        <div class="hero-stat">
-          <div class="num"><%= facultyCount %></div>
-          <div class="label">Faculty Members</div>
-        </div>
-        <div class="hero-stat">
-          <div class="num">95%</div>
-          <div class="label">Result Rate</div>
-        </div>
       </div>
     </div>
   </div>
@@ -38,32 +21,32 @@
     </div>
     <div class="grid grid-3">
       <div class="card reveal">
-        <div class="card-icon"><%- icon('graduationCap') %></div>
+        <div class="card-icon pillar-icon pillar-1"><%- icon('graduationCap') %></div>
         <h3>Academic Excellence</h3>
         <p>Rigorous, Federal Board-aligned instruction with continuous assessment and remedial support.</p>
       </div>
       <div class="card reveal">
-        <div class="card-icon"><%- icon('laptop') %></div>
+        <div class="card-icon pillar-icon pillar-2"><%- icon('laptop') %></div>
         <h3>Digital Learning</h3>
         <p>Computer science and digital literacy woven into the curriculum from an early age.</p>
       </div>
       <div class="card reveal">
-        <div class="card-icon"><%- icon('microscope') %></div>
+        <div class="card-icon pillar-icon pillar-3"><%- icon('microscope') %></div>
         <h3>Scientific Inquiry</h3>
         <p>Hands-on lab work and experiments that turn curiosity into a habit of investigation.</p>
       </div>
       <div class="card reveal">
-        <div class="card-icon"><%- icon('mic') %></div>
+        <div class="card-icon pillar-icon pillar-4"><%- icon('mic') %></div>
         <h3>Confident Communication</h3>
         <p>Debate, presentation, and language skills built through daily classroom practice.</p>
       </div>
       <div class="card reveal">
-        <div class="card-icon"><%- icon('bulb') %></div>
+        <div class="card-icon pillar-icon pillar-5"><%- icon('bulb') %></div>
         <h3>Curiosity & Innovation</h3>
         <p>Project-based learning that rewards asking "why" and "what if."</p>
       </div>
       <div class="card reveal">
-        <div class="card-icon"><%- icon('globe') %></div>
+        <div class="card-icon pillar-icon pillar-6"><%- icon('globe') %></div>
         <h3>Global Citizenship</h3>
         <p>An awareness of community, culture, and the wider world beyond Mianwali.</p>
       </div>
@@ -96,19 +79,19 @@
 <section class="section section-tinted">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">Academic Stages</span>
-      <h2>A Clear Path from Nursery to Matriculation</h2>
+      <span class="eyebrow">A Message to Parents</span>
+      <h2>From Our Chief Executive Officer</h2>
     </div>
-    <div class="grid grid-4">
-      <% stagePreview.forEach(function(stage) { %>
-        <div class="card stage-card reveal">
-          <div class="card-icon green"><%- icon('book') %></div>
-          <h4><%= stage.label %></h4>
-          <ul class="subjects">
-            <% stage.subjects.forEach(function(subj) { %><li><%= subj %></li><% }) %>
-          </ul>
-        </div>
-      <% }) %>
+    <div class="card testimonial reveal ceo-message">
+      <p>Dear Parents,</p>
+      <p>Every family that walks through our doors is trusting us with something precious &mdash; your child's early years, the years that shape how they see themselves and the world. At WABE International School, we don't take that trust lightly.</p>
+      <p>We built this school because we believe education should do more than prepare children for exams &mdash; it should prepare them for life. That means classrooms where curiosity is welcomed, teachers who know each child by name, and a campus where your son or daughter feels safe enough to ask questions and confident enough to answer them.</p>
+      <p>I invite you to visit our campus, meet our teachers, and see for yourself what "Do School Differently" means in practice. Your child's potential is our responsibility, and we take it seriously every single day.</p>
+      <p style="margin-bottom:0;">With warm regards,</p>
+      <div class="who" style="margin-top:4px;">
+        Prof. Iffat Batool<br />
+        <span style="font-weight:400; color:var(--muted); font-size:0.85rem;">Chief Executive Officer, WABE International School</span>
+      </div>
     </div>
   </div>
 </section>
@@ -121,15 +104,15 @@
       <p style="font-size:0.85rem; color:var(--muted);">Illustrative quotes shown while we collect verified parent and student testimonials.</p>
     </div>
     <div class="grid grid-3">
-      <div class="card testimonial reveal">
+      <div class="card testimonial reveal testimonial-blue">
         <p>"The teachers genuinely know each child. My son looks forward to school every single day."</p>
         <div class="who">&mdash; Parent, Class 3 <span class="badge" style="margin-left:6px;">Illustrative</span></div>
       </div>
-      <div class="card testimonial reveal">
+      <div class="card testimonial reveal testimonial-green">
         <p>"The science labs and digital classes make learning feel hands-on instead of just memorizing."</p>
         <div class="who">&mdash; Parent, Class 7 <span class="badge" style="margin-left:6px;">Illustrative</span></div>
       </div>
-      <div class="card testimonial reveal">
+      <div class="card testimonial reveal testimonial-gold">
         <p>"Our daughter has become so much more confident speaking in front of others since joining WABE."</p>
         <div class="who">&mdash; Parent, Class 5 <span class="badge" style="margin-left:6px;">Illustrative</span></div>
       </div>

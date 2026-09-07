@@ -6,31 +6,6 @@
   gap: 6px;
 }
 
-.stage-card .subjects {
-  list-style: none;
-  padding: 0;
-  margin: 12px 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.stage-card .subjects li {
-  font-size: 0.88rem;
-  color: var(--muted);
-  padding-left: 18px;
-  position: relative;
-}
-.stage-card .subjects li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 8px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--green-500);
-}
-
 .ethos-grid .card {
   text-align: center;
 }
