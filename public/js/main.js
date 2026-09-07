@@ -96,4 +96,53 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'Escape') closePopup();
     });
   }
+
+  // ---- Gallery lightbox ----
+  const lightbox = document.getElementById('galleryLightbox');
+  if (lightbox) {
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxCounter = document.getElementById('lightboxCounter');
+    let currentImages = [];
+    let currentIndex = 0;
+    let currentTitle = '';
+
+    const showImage = () => {
+      lightboxImage.src = currentImages[currentIndex];
+      lightboxTitle.textContent = currentTitle;
+      lightboxCounter.textContent = `${currentIndex + 1} of ${currentImages.length}`;
+    };
+
+    document.querySelectorAll('.gallery-tile-photo').forEach((tile) => {
+      tile.addEventListener('click', () => {
+        currentImages = JSON.parse(tile.getAttribute('data-gallery-images'));
+        currentTitle = tile.getAttribute('data-gallery-title');
+        currentIndex = 0;
+        showImage();
+        lightbox.hidden = false;
+      });
+    });
+
+    const closeLightbox = () => {
+      lightbox.hidden = true;
+    };
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    document.getElementById('lightboxPrev').addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+      showImage();
+    });
+    document.getElementById('lightboxNext').addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % currentImages.length;
+      showImage();
+    });
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (lightbox.hidden) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') document.getElementById('lightboxPrev').click();
+      if (e.key === 'ArrowRight') document.getElementById('lightboxNext').click();
+    });
+  }
 });

@@ -417,6 +417,93 @@ table.data-table tbody tr:hover {
 .gallery-tile .cap {
   font-weight: 600;
 }
+.gallery-tile-photo {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  width: 100%;
+}
+.gallery-tile-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 44, 76, 0.15), rgba(15, 44, 76, 0.75));
+}
+.gallery-tile-photo .cap,
+.gallery-tile-photo .placeholder-note {
+  position: relative;
+  z-index: 1;
+}
+.gallery-tile-photo:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}
+
+/* ---------- Gallery lightbox ---------- */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 44, 76, 0.92);
+  z-index: 250;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.lightbox-overlay[hidden] {
+  display: none;
+}
+.lightbox-content {
+  max-width: 900px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 75vh;
+  border-radius: var(--radius-md);
+  object-fit: contain;
+}
+.lightbox-caption {
+  color: var(--white);
+  font-size: 0.9rem;
+  text-align: center;
+}
+.lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+.lightbox-nav {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: var(--white);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+@media (max-width: 700px) {
+  .lightbox-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+}
 .placeholder-note {
   font-size: 0.72rem;
   opacity: 0.85;

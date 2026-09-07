@@ -1,7 +1,8 @@
 <%
   var iconMap = {
     building: 'building', microscope: 'microscope', trophy: 'trophy', mic: 'mic',
-    laptop: 'laptop', book: 'book', globe: 'globe', cap: 'graduationCap', camera: 'camera'
+    laptop: 'laptop', book: 'book', globe: 'globe', cap: 'graduationCap', camera: 'camera',
+    users: 'users', calendar: 'calendar', heart: 'heart'
   };
 %>
 <section class="section section-alt">
@@ -21,12 +22,38 @@
     <% if (tab === 'gallery') { %>
       <div class="grid grid-4">
         <% galleryCategories.forEach(function(cat) { %>
-          <div class="gallery-tile theme-<%= cat.colorTheme %> reveal">
-            <%- icon(iconMap[cat.iconKey] || 'camera') %>
-            <span class="cap"><%= cat.title %></span>
-            <span class="placeholder-note"><%= cat.images.length ? cat.images.length + ' photos' : 'Photos coming soon' %></span>
-          </div>
+          <% if (cat.images.length) { %>
+            <button
+              type="button"
+              class="gallery-tile gallery-tile-photo reveal"
+              style="background-image:url('<%= cat.images[0].imagePath %>');"
+              data-gallery-title="<%= cat.title %>"
+              data-gallery-images='<%- JSON.stringify(cat.images.map(function(img){ return img.imagePath; })).split("'").join("&#39;") %>'
+            >
+              <span class="gallery-tile-overlay"></span>
+              <span class="cap"><%= cat.title %></span>
+              <span class="placeholder-note"><%= cat.images.length %> photos</span>
+            </button>
+          <% } else { %>
+            <div class="gallery-tile theme-<%= cat.colorTheme %> reveal">
+              <%- icon(iconMap[cat.iconKey] || 'camera') %>
+              <span class="cap"><%= cat.title %></span>
+              <span class="placeholder-note">Photos coming soon</span>
+            </div>
+          <% } %>
         <% }) %>
+      </div>
+
+      <div class="lightbox-overlay" id="galleryLightbox" hidden>
+        <button type="button" class="admissions-popup-close lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+        <button type="button" class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous photo">&lsaquo;</button>
+        <div class="lightbox-content">
+          <img src="" alt="" id="lightboxImage" />
+          <div class="lightbox-caption">
+            <span id="lightboxTitle"></span> &mdash; <span id="lightboxCounter"></span>
+          </div>
+        </div>
+        <button type="button" class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next photo">&rsaquo;</button>
       </div>
     <% } else if (tab === 'events') { %>
       <div class="grid grid-3">
