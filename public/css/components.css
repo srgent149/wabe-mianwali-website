@@ -190,7 +190,7 @@
 .hero-video-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(160deg, rgba(15, 44, 76, 0.88), rgba(29, 78, 137, 0.72));
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.88), rgba(247, 249, 251, 0.75));
   z-index: 1;
 }
 .hero-video .container {
@@ -207,6 +207,15 @@
   color: var(--blue-100);
   font-size: 1.1rem;
   max-width: 520px;
+}
+.hero-video .eyebrow {
+  color: var(--green-700);
+}
+.hero-video h1 {
+  color: var(--blue-900);
+}
+.hero-video p.lede {
+  color: var(--ink);
 }
 .hero-actions {
   display: flex;
