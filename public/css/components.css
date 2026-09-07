@@ -572,6 +572,25 @@ table.data-table tbody tr:hover {
   font-style: normal;
   font-size: 1rem;
 }
+.coordinator-message {
+  text-align: center;
+  border-left: none;
+}
+.coordinator-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 20px;
+  border: 3px solid var(--white);
+  box-shadow: var(--shadow-md);
+}
+.coordinator-message p {
+  font-style: italic;
+  font-size: 1.15rem;
+  max-width: 600px;
+  margin: 0 auto 16px;
+}
 
 /* ---------- Timeline ---------- */
 .timeline {
