@@ -81,10 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ---- Admissions popup (shows every visit; closeable) ----
-  const popup = document.getElementById('admissionsPopup');
-  const popupClose = document.getElementById('admissionsPopupClose');
-  if (popup && popupClose) {
+  // ---- Ad popups (admissions, careers, etc. -- show every visit; closeable) ----
+  document.querySelectorAll('.admissions-popup-overlay').forEach((popup) => {
+    const popupClose = popup.querySelector('.admissions-popup-close');
+    if (!popupClose) return;
     const closePopup = () => {
       popup.hidden = true;
     };
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closePopup();
     });
-  }
+  });
 
   // ---- Gallery lightbox ----
   const lightbox = document.getElementById('galleryLightbox');

@@ -679,6 +679,29 @@ table.data-table tbody tr:hover {
   object-fit: contain;
   display: block;
 }
+.careers-popup-box {
+  max-width: 780px;
+  display: flex;
+  gap: 4px;
+  overflow-y: auto;
+  background: var(--paper);
+}
+.careers-popup-box a {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+.careers-popup-box img {
+  max-height: 80vh;
+}
+@media (max-width: 700px) {
+  .careers-popup-box {
+    flex-direction: column;
+    max-height: 90vh;
+  }
+  .careers-popup-box img {
+    max-height: none;
+  }
+}
 .admissions-popup-close {
   position: absolute;
   top: 10px;
